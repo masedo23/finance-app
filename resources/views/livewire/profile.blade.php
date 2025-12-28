@@ -70,20 +70,10 @@
     <!-- IDENTITY -->
     <section class="px-4 mb-10">
         <p class="text-xs font-bold uppercase tracking-widest text-white/50 px-4 mb-3">
-            Identity
+            Status
         </p>
 
         <div class="rounded-md bg-white/5 backdrop-blur border border-white/10 overflow-hidden">
-            <div class="flex items-center gap-4 p-4 border-b border-white/10">
-                <div class="size-10 rounded-full bg-white/5 text-primary flex items-center justify-center">
-                    <span class="material-symbols-outlined">call</span>
-                </div>
-
-                <div class="flex-1">
-                    <p class="text-xs uppercase text-white/50">Mobile Number</p>
-                    <p class="font-semibold">+1 (555) 019-2834</p>
-                </div>
-            </div>
 
             <div class="flex items-center gap-4 p-4">
                 <div class="size-10 rounded-full bg-white/5 text-primary flex items-center justify-center">
