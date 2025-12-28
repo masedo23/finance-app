@@ -1,0 +1,57 @@
+@import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* ============================= */
+/* THEME CONFIG (Tailwind v4)    */
+/* ============================= */
+@theme {
+    /* Colors */
+    --color-primary: #0df20d;
+    /* Neon Green */
+    --color-primary-dark: #0abf0a;
+    --color-background-light: #f5f8f5;
+    --color-background-dark: #050a05;
+    /* Deep green black */
+    --color-glass-border: rgba(255, 255, 255, 0.08);
+    --color-glass-bg: rgba(255, 255, 255, 0.03);
+
+    /* Font */
+    --font-display: "Inter", sans-serif;
+
+    /* Radius (optional biar konsisten) */
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+}
+
+/* ============================= */
+/* CUSTOM UTILITIES              */
+/* ============================= */
+
+/* Main background gradient */
+.bg-main-gradient {
+    background: linear-gradient(180deg, #0a1f0a 0%, #000000 100%);
+}
+
+/* Glassmorphism card */
+.glass-card {
+    background: var(--color-glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--color-glass-border);
+    border-radius: var(--radius-xl);
+}
+
+/* Neon glow effect */
+.neon-glow {
+    box-shadow: 0 0 12px color-mix(in srgb, var(--color-primary) 60%, transparent);
+}
