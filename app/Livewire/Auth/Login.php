@@ -3,20 +3,21 @@
 namespace App\Livewire\Auth;
 
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Login extends Component
 {
 
+    #[Validate('required|email:dns')]
     public $email = '';
+
+    #[Validate('required')]
     public $password = '';
 
     public function login()
     {
-        $this->validate([
-            'email' => 'required|email:dns',
-            'password' => 'required|min:8',
-        ]);
+        $this->validate();
 
         if(Auth::attempt([
 

@@ -27,7 +27,7 @@ Route::get('/', Dashboard::class)->name('home');
 
 Route::get('/history', History::class)->name('history');
 
-Route::get('/history/detail', EditHistory::class)->name('edit-history');
+Route::get('/history/{transaksi}', EditHistory::class)->name('edit-history');
 
 Route::get('/create', TambahTransaksi::class)->name('create');
 
@@ -44,5 +44,3 @@ Route::get('/users-list', DaftarUser::class)->name('daftar-user');
 Route::get('/users-list/detail', DetailUser::class)->name('detail-user');
 
 Route::get('/users-list/detail/edit', EditUser::class)->name('edit-user');
-
-

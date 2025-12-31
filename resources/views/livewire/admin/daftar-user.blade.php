@@ -29,26 +29,28 @@
     <div class="space-y-3 mb-20">
 
         <!-- USER ITEM -->
-        <a href="{{ route('detail-user') }}" wire:navigate
-            class="bg-white/5 border border-white/10 rounded-xl px-4 py-3
+        @foreach ($users as $user)
+            <a href="{{ route('detail-user') }}" wire:navigate
+                class="bg-white/5 border border-white/10 rounded-xl px-4 py-3
           flex items-center justify-between
           transition hover:bg-white/10 active:scale-[0.98]">
 
-            <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden">
-                    <img src="{{ asset('img/avatar.jpg') }}">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden">
+                        <img src="{{ asset('img/avatar.jpg') }}">
+                    </div>
+
+                    <div>
+                        <p class="font-semibold">{{ $user->name }}</p>
+                        <p class="text-xs text-white/50">Joined · {{ $user->created_at->format('d M Y') }}</p>
+                    </div>
                 </div>
 
-                <div>
-                    <p class="font-semibold">Edo Sudrajat</p>
-                    <p class="text-xs text-white/50">Joined · 12 Jan 2025</p>
-                </div>
-            </div>
-
-            <span class="material-symbols-outlined text-white/40">
-                chevron_right
-            </span>
-        </a>
+                <span class="material-symbols-outlined text-white/40">
+                    chevron_right
+                </span>
+            </a>
+        @endforeach
 
         <a href="/users/1"
             class="bg-white/5 border border-white/10 rounded-xl px-4 py-3
