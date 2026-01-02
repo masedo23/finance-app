@@ -13,23 +13,37 @@ class Dashboard extends Component
     {
         return number_format($number, 0, ',', '.');
     }
-
-    public function goBack()
-    {
-        return redirect(url()->previous());
-    }
     
     public function render()
     {
+        $userId = Auth::id();
 
-        $income = $this->formatNumber(Transaksi::where('type', 'income')->sum('amount'));
-        $expensetotal = $this->formatNumber(Transaksi::whereIn('type', ['expense', 'receivable', 'payable'])->sum('amount'));
-        $expense = Transaksi::whereIn('type', ['expense','payable'])->sum('amount');
-        $balance = Transaksi::where('type', 'income')->sum('amount');
+        $income = $this->formatNumber(
+            Transaksi::where('user_id', $userId)
+                ->where('type', 'income')
+                ->sum('amount')
+        );
+
+        $expensetotal = $this->formatNumber(
+            Transaksi::where('user_id', $userId)
+                ->whereIn('type', ['expense', 'receivable', 'payable'])
+                ->sum('amount')
+        );
+
+        $expense = Transaksi::where('user_id', $userId)
+            ->whereIn('type', ['expense', 'payable'])
+            ->sum('amount');
+
+        $balance = Transaksi::where('user_id', $userId)
+            ->where('type', 'income')
+            ->sum('amount');
+
         $totalBalance = $balance - $expense;
 
-        $transactions = Transaksi::whereIn('type', ['receivable', 'payable'])
-            ->orderBy('created_at', 'desc')->get();
+        $transactions = Transaksi::where('user_id', $userId)
+            ->whereIn('type', ['receivable', 'payable'])
+            ->latest()
+            ->get();
 
         return view('livewire.dashboard', [
             'user' => Auth::user(),
@@ -39,4 +53,4 @@ class Dashboard extends Component
             'transactions' => $transactions,
         ]);
     }
-}
+}  

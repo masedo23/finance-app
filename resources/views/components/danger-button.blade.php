@@ -1,4 +1,4 @@
-<button
+<button {{ $attributes }}
     class="w-full h-11 cursor-pointer rounded border border-red-500/30 p-3
            text-red-400 font-semibold text-sm bg-red-500/10
            hover:border-red-500 hover:bg-red-500/10

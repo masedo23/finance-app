@@ -98,7 +98,8 @@
 
                 <div class="flex flex-col gap-3">
                     @forelse ($transactions as $transaction)
-                        <a href="{{ route('edit-history',$transaction->id) }}" wire:navigate wire:key="transaction-{{ $transaction->id }}"
+                        <a href="{{ route('edit-history', $transaction->id) }}" wire:navigate
+                            wire:key="transaction-{{ $transaction->id }}"
                             class="flex items-center justify-between p-3 rounded-xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition cursor-pointer">
 
                             <div class="flex items-center gap-4">
@@ -131,7 +132,9 @@
                             </div>
                         </a>
                     @empty
-                        <p class="text-center text-green-500 font-semibold mt-10">Alhamdulillah, debt-free!</p>
+                        <p class="text-center text-white/40 mt-10">
+                            Alhamdulillah, no pinned transactions yet.
+                        </p>
                     @endforelse
                 </div>
 

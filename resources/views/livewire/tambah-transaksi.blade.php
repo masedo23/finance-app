@@ -1,4 +1,4 @@
-<main
+<div
     class="relative h-screen
            bg-background-dark font-[Inter] text-white antialiased
            selection:bg-primary selection:text-black">
@@ -166,4 +166,4 @@
             </form>
         </div>
     </div>
-</main>
+</div>

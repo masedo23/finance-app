@@ -2,13 +2,11 @@
 
     <!-- Background -->
     <div class="fixed inset-0 pointer-events-none">
-        <div
-            class="absolute -top-32 -left-32 w-[60%] h-[60%] 
+        <div class="absolute -top-32 -left-32 w-[60%] h-[60%] 
                     bg-emerald-400/15 blur-[140px]">
         </div>
 
-        <div
-            class="absolute -bottom-32 -right-32 w-[50%] h-[50%] 
+        <div class="absolute -bottom-32 -right-32 w-[50%] h-[50%] 
                     bg-emerald-500/10 blur-[120px]">
         </div>
 
@@ -56,7 +54,7 @@
         <!-- ACTION -->
         <div class="flex flex-col gap-5">
             <x-button-save>Save Note</x-button-save>
-            <x-danger-button>Delete Note</x-danger-button>
+            <x-danger-button wire:click="hapusCatatan" wire:confirm="Are you sure you want to delete this note?">Delete Note</x-danger-button>
         </div>
 
     </main>

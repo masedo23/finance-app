@@ -56,14 +56,14 @@
         </div>
 
         <div class="text-center">
-            <h2 class="text-2xl font-bold flex items-center gap-2">
-                Edo Sudrajat
+            <h2 class="text-2xl font-bold flex items-center gap-2 capitalize">
+                {{ $user->name }}
                 <span class="material-symbols-outlined text-blue-500">
                     verified
                 </span>
             </h2>
 
-            <p class="text-primary/90 font-sm">admin@fintech.com</p>
+            <p class="text-primary/90 font-sm">{{ $user->email }}</p>
         </div>
     </section>
 
@@ -109,7 +109,7 @@
     <!-- LOGOUT -->
     <section class="px-4 mt-8 pb-25">
 
-        <x-danger-button>Log Out --></x-danger-button>
+        <x-danger-button wire:click="logout">Log Out --></x-danger-button>
 
         <p class="text-center text-xs text-white/30 mt-4">
             Version 1.0.0

@@ -5,12 +5,79 @@
         class="relative min-h-screen w-full flex flex-col bg-[linear-gradient(180deg,#0a1f0a_0%,#000_100%)] overflow-x-hidden">
 
         {{-- Top App Bar --}}
-        <div class="relative flex items-center p-4 pb-2 z-10">
-            <x-arrow-back href="{{ route('home') }}"></x-arrow-back>
+        <div class="relative grid grid-cols-3 items-center py-6 z-20">
 
-            <h2 class="absolute left-0 right-0 text-center text-white text-lg font-bold pointer-events-none">
+            <!-- Left -->
+            <div class="flex justify-start pl-4">
+                <x-arrow-back href="{{ route('home') }}" />
+            </div>
+
+            <!-- Center -->
+            <h2 class="text-center text-white text-lg font-bold">
                 All Transactions
             </h2>
+
+            <!-- Right -->
+            <div class="flex justify-end pr-4 relative" x-data="{ open: false }">
+
+                <button @click="open = !open"
+                    class="text-white hover:text-primary transition
+                   flex size-10 items-center justify-center
+                   rounded-full active:bg-white/5">
+                    <span class="material-symbols-outlined">
+                        filter_list
+                    </span>
+                </button>
+
+                <!-- Dropdown -->
+                <div x-show="open" x-transition @click.outside="open = false"
+                    class="absolute right-0 me-2 mt-2 z-50 w-44 bg-zinc-900/95 backdrop-blur border border-white/10 rounded-xl shadow-xl">
+                    <ul class="p-1 text-sm text-zinc-200">
+
+                        @php
+                            $itemClass = "w-full text-left px-3 py-2 rounded-lg
+                          hover:bg-white/10 transition
+                          flex items-center gap-2";
+                        @endphp
+
+                        <li>
+                            <button wire:click="$set('filter','all')" @click="open = false" class="{{ $itemClass }}">
+                                All
+                            </button>
+                        </li>
+
+                        <li>
+                            <button wire:click="$set('filter','income')" @click="open = false"
+                                class="{{ $itemClass }}">
+                                Income
+                            </button>
+                        </li>
+
+                        <li>
+                            <button wire:click="$set('filter','expense')" @click="open = false"
+                                class="{{ $itemClass }}">
+                                Expense
+                            </button>
+                        </li>
+
+                        <li>
+                            <button wire:click="$set('filter','receivable')" @click="open = false"
+                                class="{{ $itemClass }}">
+                                Receivable
+                            </button>
+                        </li>
+
+                        <li>
+                            <button wire:click="$set('filter','payable')" @click="open = false"
+                                class="{{ $itemClass }}">
+                                Payable
+                            </button>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
         </div>
 
         {{-- Toast Notification --}}
@@ -45,11 +112,12 @@
                     class="flex items-center h-12 rounded-xl glass-effect border border-transparent
                             focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/50">
                     <span class="material-symbols-outlined text-white/60 pl-4">search</span>
-                    <input type="text" placeholder="Search transactions..."
-                        class="flex-1 bg-transparent border-0 px-3 text-white
-           placeholder:text-white/40
-           focus:outline-none focus:ring-0" />
-
+                    <input type="text" placeholder="Search transactions..." wire:model.live.debounce.500ms="search"
+                        class="flex-1 bg-transparent border-0 px-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-0" />
+                    <span wire:click="$set('search','')"
+                        class="material-symbols-outlined bg-white/10 rounded-full cursor-pointer mr-3 hover:bg-white/20 transition {{ $search ? 'opacity-100' : 'opacity-0' }}">
+                        close_small
+                    </span>
                 </div>
             </div>
         </div>
@@ -89,9 +157,12 @@
                     </div>
                 </a>
             @empty
-                <p class="text-center text-green-500 font-semibold mt-10">Nothing History!</p>
+                <p class="text-center text-white/40 mt-10">
+                    No transactions found.
+                </p>
             @endforelse
         </div>
     </div>
+
     <x-bottom-navbar />
 </div>
