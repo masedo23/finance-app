@@ -23,14 +23,21 @@ class EditHistory extends Component
 
     public Transaksi $transaksi;
 
+    public $previousUrl;
+
     public function mount(Transaksi $transaksi)
     {
-        $this->fill([
-            'type' => $transaksi->type,
-            'title' => $transaksi->title,
-            'amount' => $transaksi->amount,
-            'note' => $transaksi->note,
-        ]);
+        $this->type = $transaksi->type;
+        $this->title = $transaksi->title;
+        $this->amount = $transaksi->amount;
+        $this->note = $transaksi->note;
+
+        $this->previousUrl = url()->previous();
+    }
+
+    public function preveousPage()
+    {
+        return redirect()->route('history');
     }
 
     public function editTransaksi() {
@@ -54,7 +61,8 @@ class EditHistory extends Component
         $this->transaksi->delete();
 
         session()->flash('message', 'Transaction deleted successfully.');   
-        $this->redirectRoute('history');
+
+        return redirect($this->previousUrl);
 
     }
 

@@ -66,7 +66,8 @@
             {{-- add button --}}
             <div class="flex justify-between items-end">
 
-                <p class="text-xs text-white/40 uppercase tracking-widest mt-4 ml-5">{{ $notes->isNotEmpty() ? 'Recent' : '' }} </p>
+                <p class="text-xs text-white/40 uppercase tracking-widest mt-4 ml-5">
+                    {{ $notes->isNotEmpty() ? 'Recent' : '' }} </p>
 
                 <a href="{{ route('create-note') }}" wire:navigate
                     class="flex items-center px-3 py-2 rounded bg-primary/80 hover:bg-primary text-black text-sm font-semibold shadow-sm hover:shadow-md active:scale-[0.98] transition-all duration-200">Add
@@ -80,7 +81,7 @@
             <!-- NOTE ITEM -->
             <div class="flex flex-col mb-15">
                 @forelse ($notes as $note)
-                    <a href="{{ route('edit-note', $note->id) }}"
+                    <a href="{{ route('edit-note', $note->id) }}" wire:navigate
                         class="glass-panel p-5 rounded-xl block transition active:scale-[0.98] active:bg-white/10">
 
                         <div class="flex-1 min-w-0">

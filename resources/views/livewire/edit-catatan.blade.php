@@ -30,17 +30,22 @@
 
             <!-- Title -->
             <div>
-                <label class="text-sm text-primary/70">Note Title</label>
-                <input type="text" placeholder="e.g. Buy a macbook air"
+                <label class="text-md text-primary/70 font-bold">Note Title</label>
+                <input wire:model="title" type="text" placeholder="e.g. Buy a macbook air"
                     class="mt-2 w-full h-14 px-4 rounded-sm
                            bg-black/30 border border-white/10 focus:outline-none
-                           focus:border-primary/70" />
+                           focus:border-primary/70"
+                    value="{{ $catatan->title }}" />
+
+                @error('title')
+                    <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                @enderror
             </div>
 
             <!-- Content -->
             <div class="flex flex-col flex-1">
-                <label class="text-sm text-primary/70">Note Text</label>
-                <textarea rows="6"
+                <label class="text-md text-primary/70 font-bold">Note Text</label>
+                <textarea wire:model="content" rows="6"
                     class="mt-2 min-h-60 p-4 rounded-sm
                            bg-black/30 border border-white/10
                            focus:outline-none
@@ -48,13 +53,17 @@
                            focus:border-primary/70
                            resize-none"
                     placeholder="Write your note here..."></textarea>
+                @error('content')
+                    <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                @enderror
             </div>
         </div>
 
         <!-- ACTION -->
         <div class="flex flex-col gap-5">
-            <x-button-save>Save Note</x-button-save>
-            <x-danger-button wire:click="hapusCatatan" wire:confirm="Are you sure you want to delete this note?">Delete Note</x-danger-button>
+            <x-button-save wire:click="editCatatan">Save Note</x-button-save>
+            <x-danger-button wire:click="hapusCatatan" wire:confirm="Are you sure you want to delete this note?">Delete
+                Note</x-danger-button>
         </div>
 
     </main>

@@ -1,22 +1,24 @@
 <div
-    class="relative w-full h-dvh overflow-hidden
+    class="relative w-full min-h-screen overflow-hidden
            bg-linear-to-b from-[#102210] via-[#081608] to-[#020502]
            text-white font-[Inter]">
 
-    <!-- Glow -->
-    <div class="absolute -top-24 -right-24 w-75 h-75 bg-primary/10 rounded-full blur-[120px]"></div>
-    <div class="absolute top-1/2 -left-32 w-62.5 h-62.5 bg-primary/5 rounded-full blur-[100px]"></div>
+    <!-- GLOW DECORATION (SAFE) -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute -top-24 -right-24 w-72 h-72 bg-primary/10 rounded-full blur-[120px]"></div>
+        <div class="absolute top-1/2 -left-32 w-64 h-64 bg-primary/5 rounded-full blur-[100px]"></div>
+    </div>
 
     <!-- CONTENT -->
-    <div class="relative z-10 flex flex-col h-full max-w-md mx-auto px-6">
+    <div class="relative z-10 flex flex-col min-h-screen max-w-md mx-auto px-6">
 
         <!-- CENTER AREA -->
         <div class="flex flex-col justify-center flex-1 gap-6">
 
             <!-- HEADER -->
             <div>
-                <h1 class="text-3xl font-bold mb-2">Create Account</h1>
-                <p class="text-white/60">
+                <h1 class="text-2xl font-bold">Create Account</h1>
+                <p class="text-white/60 text-sm">
                     Sign up to start your financial journey
                 </p>
             </div>
@@ -25,18 +27,15 @@
             <form wire:submit.prevent="register"
                 class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-5">
 
-                <!-- Full Name -->
+                <!-- FULL NAME -->
                 <div>
                     <label for="name" class="text-sm text-white/70">Full Name</label>
                     <div class="relative mt-2">
-                        <span
-                            class="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 material-symbols-outlined text-sm"
-                            style="font-size: 22px;">
-                            person
-                        </span>
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 material-symbols-outlined"
+                            style="font-size:22px">person</span>
                         <input type="text" wire:model.defer="name" placeholder="Your full name" id="name"
                             class="w-full bg-black/30 rounded py-3 pl-12 pr-4
-                                   text-white placeholder-white/30
+                                   text-white placeholder:white/30
                                    outline-none focus:ring-1 focus:ring-primary/60 placeholder:text-sm">
                     </div>
                     @error('name')
@@ -44,16 +43,16 @@
                     @enderror
                 </div>
 
-                <!-- Email -->
+                <!-- EMAIL -->
                 <div>
                     <label for="email" class="text-sm text-white/70">Email</label>
                     <div class="relative mt-2">
-                        <span
-                            class="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 material-symbols-outlined text-xl"
-                            style="font-size: 22px;">email</span>
-                        <input id="email" type="email" wire:model.defer="email" placeholder="name@example.com"
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 material-symbols-outlined"
+                            style="font-size:22px">email</span>
+                        <input type="text" wire:model.defer="email" placeholder="name@example.com" name="email"
+                            id="email"
                             class="w-full bg-black/30 rounded py-3 pl-12 pr-4
-                                   text-white placeholder-white/30
+                                   text-white placeholder:white/30
                                    outline-none focus:ring-1 focus:ring-primary/60 placeholder:text-sm">
                     </div>
                     @error('email')
@@ -61,41 +60,59 @@
                     @enderror
                 </div>
 
-                <!-- Password -->
+                <!-- PASSWORD -->
                 <div>
                     <label for="password" class="text-sm text-white/70">Password</label>
                     <div class="relative mt-2">
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 material-symbols-outlined"
-                            style="font-size: 22px;">
-                            lock
-                        </span>
-                        <input id="password" type="password" wire:model.defer="password" placeholder="Create password"
+                            style="font-size:22px">lock</span>
+                        <input type="password" wire:model.defer="password" placeholder="Create password" id="password"
                             class="w-full bg-black/30 rounded py-3 pl-12 pr-4
-                                   text-white placeholder-white/30
-                                   outline-none focus:ring-1 focus:ring-primary/60 placeholder: text-sm">
+                                   text-white placeholder:white/30
+                                   outline-none focus:ring-1 focus:ring-primary/60 placeholder:text-sm">
                     </div>
                     @error('password')
                         <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <!-- Confirm Password -->
+                <!-- CONFIRM PASSWORD -->
                 <div>
                     <label for="password_confirmation" class="text-sm text-white/70">Confirm Password</label>
                     <div class="relative mt-2">
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 material-symbols-outlined"
-                            style="font-size: 22px;">
-                            lock
-                        </span>
-                        <input id="password_confirmation" type="password" wire:model.defer="password_confirmation"
-                            placeholder="Repeat password"
-                            class="w-full bg-black/30 rounded py-3 pl-12 pr-4 text-white placeholder-white/30 outline-none focus:ring-1 focus:ring-primary/60">
+                            style="font-size:22px">lock</span>
+                        <input type="password" wire:model.defer="password_confirmation" placeholder="Repeat password"
+                            id="password_confirmation"
+                            class="w-full bg-black/30 rounded py-3 pl-12 pr-4
+                                   text-white placeholder:white/30
+                                   outline-none focus:ring-1 focus:ring-primary/60 placeholder:text-sm">
                     </div>
                 </div>
 
-                <!-- Button -->
-                <button
-                    class="flex justify-center items-center gap-2 w-full h-11 cursor-pointer rounded bg-primary/25 text-primary font-semibold text-sm tracking-wide border border-primary/30 hover:bg-primary/25 hover:border-primary active:scale-[0.98] transition">
+                <!-- TERMS -->
+                <label class="flex items-start gap-3 text-xs text-white/60">
+                    <input type="checkbox" wire:model.live="agree"
+                        class="mt-0.5 rounded border-white/20 bg-transparent text-primary focus:ring-primary">
+
+                    <span class="leading-snug">
+                        I agree to the
+                        <a href="{{ route('terms') }}" class="text-primary hover:underline">
+                            Privacy Policy
+                        </a>
+                        and
+                        <a href="{{ route('terms') }}" class="text-primary hover:underline">
+                            Terms & Conditions
+                        </a>
+                    </span>
+                </label>
+
+                <!-- SUBMIT -->
+                <button @disabled(!$agree)
+                    class="flex items-center justify-center gap-2 w-full h-11
+                           rounded bg-primary/25 text-primary font-semibold text-sm
+                           border border-primary/30
+                            active:scale-[0.98] transition {{ $agree ? 'hover:bg-primary/30 bg-primary/25 text-primary border border-primary/30 active:scale-[0.98]' : 'bg-white/5 text-white/30 border border-white/10 cursor-not-allowed' }}">
                     <div class="flex justify-center" wire:loading wire:target="register">
                         <svg aria-hidden="true" class="w-6 h-6 animate-spin text-white/20 fill-emerald-400"
                             viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -114,14 +131,13 @@
             </form>
 
             <!-- FOOTER -->
-            <div class="text-center pb-6 text-sm">
-                <p class="text-white/60">
-                    Already have an account?
-                    <a href="{{ route('login') }}" wire:navigate class="text-primary font-semibold hover:underline">
-                        Log in
-                    </a>
-                </p>
+            <div class="text-center pb-6 text-sm text-white/60">
+                Already have an account?
+                <a href="{{ route('login') }}" wire:navigate class="text-primary font-semibold hover:underline">
+                    Log in
+                </a>
             </div>
+
         </div>
     </div>
 </div>

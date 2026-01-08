@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
+use function Symfony\Component\Clock\now;
+
 class Login extends Component
 {
 
@@ -15,20 +17,19 @@ class Login extends Component
     #[Validate('required')]
     public $password = '';
 
-    public function login()
-    {
+    public function login() {
         $this->validate();
 
-        if(Auth::attempt([
-
-            'email' => $this->email, 
-            'password' => $this->password])) {
-
-            return redirect()->route('home');
+        if (!Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
+            $this->addError('email', 'Email or password is incorrect');
+            return;
         }
 
-        $this->addError('email', 'Invalid email or password.');
+        Auth::user()->update([
+            'last_activity_at' => now(),
+        ]);
 
+        $this->redirectRoute('home');
     }
 
     public function render()

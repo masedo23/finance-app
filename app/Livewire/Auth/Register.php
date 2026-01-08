@@ -4,22 +4,26 @@ namespace App\Livewire\Auth;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Register extends Component
 {
 
-    #[Validate('required|string|min:3|max:255')]
-    public $name;
+    public $name = '';
+    public $email = '';
+    public $password = '';
+    public $password_confirmation = '';
+    public $agree = false;
 
-    #[Validate('required|string|email:dns|max:255|unique:users')]
-    public $email;
-
-    #[Validate('required|string|min:8|confirmed')]
-    public $password;
-
-    public $password_confirmation;
+    protected function rules()
+    {
+        return [
+            'name' => 'required|string|min:3|max:255',
+            'email' => 'required|string|email:dns|max:255|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+            'agree' => 'accepted',
+        ];
+    }
 
     public function register()
     {

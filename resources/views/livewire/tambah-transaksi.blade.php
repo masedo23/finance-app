@@ -1,7 +1,7 @@
 <div
     class="relative h-screen
            bg-background-dark font-[Inter] text-white antialiased
-           selection:bg-primary selection:text-black">
+           selection:bg-primary selection:text-black bg-linear-to-b from-[#102210] via-[#081608] to-[#020502]">
 
     <!-- SCROLL CONTAINER -->
     <div class="h-full overflow-y-auto no-scrollbar">
@@ -20,7 +20,7 @@
             <form wire:submit.prevent="tambahTransaksi">
 
                 {{-- ====================== TYPE ====================== --}}
-                <div class="mt-2 mb-8">
+                <div class="mt-2">
                     <div class="glass-panel p-1 rounded-xl grid grid-cols-4 h-11 gap-1">
 
                         {{-- Income --}}
@@ -76,14 +76,14 @@
 
                 {{-- Error message untuk type --}}
                 @error('type')
-                    <span class="text-yellow-500 text-xs mt-2">{{ $message }}</span>
+                    <span class="text-yellow-500 text-xs">{{ $message }}</span>
                 @enderror
 
                 {{-- ====================== AMOUNT ====================== --}}
                 <div x-data="{
                     display: '',
                     raw: @entangle('amount')
-                }" class="flex flex-col items-center mb-10">
+                }" class="flex flex-col items-center my-10">
                     <p class="text-primary/60 text-[11px] uppercase mb-2 tracking-widest">
                         Enter Amount
                     </p>
@@ -94,9 +94,7 @@
                         <input type="text" x-model="display"
                             @input="raw = display.replace(/\D/g, ''); display = new Intl.NumberFormat('id-ID').format(raw);"
                             placeholder="0"
-                            class="bg-transparent border-none focus:ring-0
-                   text-4xl font-bold text-white text-center
-                   placeholder:text-white/20 w-50">
+                            class="bg-transparent border-none focus:ring-0 text-4xl font-bold text-white text-center placeholder:text-white/20 w-50">
                     </div>
 
                     @error('amount')
@@ -107,7 +105,7 @@
 
 
                 {{-- ====================== TITLE ====================== --}}
-                <div class="glass-input rounded-xl p-4 mb-4">
+                <div class="glass-input rounded-xl p-4">
                     <label for="title" class="text-sm text-primary/70 mb-1 block">
                         Title
                     </label>
@@ -146,7 +144,7 @@
                 {{-- ====================== BUTTON ====================== --}}
                 <div class="mt-10">
                     <button type="submit"
-                        class="flex justify-center items-center gap-2 w-full h-11 cursor-pointer rounded bg-primary/25 text-primary font-semibold text-sm tracking-wide border border-primary/30 hover:bg-primary/25 hover:border-primary active:scale-[0.98] transition">
+                        class="text-white/90 flex justify-center items-center gap-2 w-full h-11 cursor-pointer rounded bg-primary/25 font-semibold text-sm tracking-wide border border-primary/30 hover:bg-primary/25 hover:border-primary active:scale-[0.98] transition">
                         <div class="flex justify-center" wire:loading wire:target="tambahTransaksi">
                             <svg aria-hidden="true" class="w-6 h-6 animate-spin text-white/20 fill-emerald-400"
                                 viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">

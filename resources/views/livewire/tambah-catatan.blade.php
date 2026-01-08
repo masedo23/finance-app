@@ -1,4 +1,9 @@
-<div class="relative min-h-screen flex flex-col overflow-hidden bg-zinc-950 text-white font-inter">
+<div
+    class="relative min-h-screen flex flex-col overflow-hidden bg-linear-to-b 
+from-[#102210] 
+via-[#081608] 
+to-[#020502]
+ text-white font-inter">
 
     <!-- Background -->
     <div class="fixed inset-0 pointer-events-none">
@@ -12,7 +17,6 @@
                     bg-emerald-500/10 blur-[120px] rounded-full">
         </div>
 
-        <div class="absolute inset-0 bg-linear-to-b from-zinc-900 via-zinc-900 to-black"></div>
     </div>
 
     <!-- Header -->
@@ -32,8 +36,8 @@
 
             <!-- Title -->
             <div>
-                <label class="text-sm text-primary/70">Note Title</label>
-                <input type="text" placeholder="e.g. Buy a macbook air" wire:model="title"
+                <label for="title" class="text-md font-bold text-primary/70">Note Title</label>
+                <input type="text" placeholder="e.g. Buy a macbook air" wire:model="title" id="title"
                     class="mt-2 w-full py-3 px-4 rounded-sm
                            bg-black/30 border border-white/10 focus:outline-none
                            focus:border-primary/70 placeholder:text-sm" />
@@ -45,7 +49,7 @@
 
             <!-- Content -->
             <div class="flex flex-col flex-1">
-                <label class="text-sm text-primary/70" for="note-text">Note Text</label>
+                <label class="text-md font-bold text-primary/70" for="note-text">Note Text</label>
                 <textarea id="note-text" rows="10" wire:model="content"
                     class="mt-2 p-4 rounded-sm
                            bg-black/30 border border-white/10

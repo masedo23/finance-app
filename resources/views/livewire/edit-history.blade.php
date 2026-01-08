@@ -9,7 +9,7 @@
         <!-- HEADER (NOW SCROLLS) -->
         <header class="flex items-center px-5 pt-10 pb-4">
 
-            <x-close href="{{ route('history') }}"></x-close>
+            <x-close href="{{ url()->previous() }}"></x-close>
 
             <h2 class="flex-1 text-center text-lg font-bold">
                 Edit Transaction
@@ -29,10 +29,7 @@
                         <label class="cursor-pointer">
                             <input type="radio" wire:model="type" value="income" class="peer sr-only">
                             <div
-                                class="h-full flex items-center justify-center
-                text-xs font-semibold text-white/60
-                peer-checked:bg-primary peer-checked:text-black
-                rounded transition">
+                                class="h-full flex items-center justify-center text-xs font-semibold text-white/60 peer-checked:bg-primary peer-checked:text-black rounded transition">
                                 Income
                             </div>
                         </label>
@@ -41,10 +38,7 @@
                         <label class="cursor-pointer">
                             <input type="radio" wire:model="type" value="expense" class="peer sr-only">
                             <div
-                                class="h-full flex items-center justify-center
-                text-xs font-semibold text-white/60
-                peer-checked:bg-primary peer-checked:text-black
-                rounded transition">
+                                class="h-full flex items-center justify-center text-xs font-semibold text-white/60 peer-checked:bg-primary peer-checked:text-black rounded transition">
                                 Expense
                             </div>
                         </label>
@@ -133,7 +127,7 @@
                 </div>
                 <div class="mt-10 flex flex-col gap-5">
                     <button type="submit"
-                        class="flex justify-center items-center gap-2 w-full h-11 cursor-pointer rounded bg-primary/25 text-primary font-semibold text-sm tracking-wide border border-primary/30 hover:bg-primary/25 hover:border-primary active:scale-[0.98] transition">
+                        class="text-white/80 flex justify-center items-center gap-2 w-full h-11 cursor-pointer rounded bg-primary/25 font-semibold text-sm tracking-wide border border-primary/30 hover:bg-primary/25 hover:border-primary active:scale-[0.98] transition">
                         <div class="flex justify-center" wire:loading wire:target="editTransaksi">
                             <svg aria-hidden="true" class="w-6 h-6 animate-spin text-white/20 fill-emerald-400"
                                 viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -152,7 +146,7 @@
 
                     <button type="button" wire:confirm="Are you sure you want to delete this transaction?"
                         wire:click="deleteHistory"
-                        class="w-full h-11 cursor-pointer rounded border border-red-500/30 p-3 text-red-400 font-semibold text-sm bg-red-500/10 hover:border-red-500 hover:bg-red-500/10 active:scale-[0.98] transition flex gap-2 justify-center items-center">
+                        class="text-white/80 w-full h-11 cursor-pointer rounded border border-red-500/30 p-3 font-semibold text-sm bg-red-500/10 hover:border-red-500 hover:bg-red-500/10 active:scale-[0.98] transition flex gap-2 justify-center items-center">
                         <div class="flex justify-center" wire:loading wire:target="deleteHistory">
                             <svg aria-hidden="true" class="w-6 h-6 animate-spin text-red-400/30 fill-red-400"
                                 viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">

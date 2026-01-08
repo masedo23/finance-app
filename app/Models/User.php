@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -22,6 +23,8 @@ class User extends Authenticatable
         'email',
         'password',
         'avatar',
+        'last_activity_at',
+        'google_id',
     ];
 
     /**
@@ -44,6 +47,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'last_activity_at' => 'datetime',
         ];
     }
 
@@ -56,4 +60,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(Catatan::class);
     }
+
+    public function getAvatarUrlAttribute()
+    {
+    if (! $this->avatar) {
+        return asset('img/avatar.jpg');
+    }
+
+    if (Str::startsWith($this->avatar, 'http')) {
+        return $this->avatar;
+    }
+
+    return asset('storage/' . $this->avatar);
+    }
+
 }

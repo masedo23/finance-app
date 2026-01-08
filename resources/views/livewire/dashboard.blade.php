@@ -8,7 +8,7 @@
             <div class="flex items-center gap-3">
                 <div class="relative">
                     <div class="relative h-12 w-12 rounded-full overflow-hidden border-2 border-white/10">
-                        <img src="{{ asset('img/avatar.jpg') }}" class="h-full w-full object-cover">
+                        <img src="{{ $user->avatar_url }}" class="h-full w-full object-cover">
                     </div>
 
                     <div class="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-primary border-2 border-[#0a1f0a]">
@@ -19,6 +19,7 @@
                     <h1 class="text-lg font-bold capitalize">{{ $user->name }}</h1>
                 </div>
             </div>
+            <span class="material-symbols-outlined">menu</span>
         </header>
 
         <!-- Main -->
@@ -90,10 +91,12 @@
 
                 <div class="flex items-center justify-between py-2">
                     <h3 class="text-lg font-bold">Pinned Transactions</h3>
-                    <a href="{{ route('history') }}" wire:navigate
-                        class="text-primary text-sm font-semibold hover:text-white transition">
-                        See All
-                    </a>
+                    @if ($transactions->isNotEmpty())
+                        <a href="{{ route('history') }}" wire:navigate
+                            class="text-sm text-primary font-medium cursor-pointer">
+                            See All
+                        </a>
+                    @endif
                 </div>
 
                 <div class="flex flex-col gap-3">
