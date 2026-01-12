@@ -16,26 +16,26 @@ class Profile extends Component
     public $avatar;
 
     public function saveAvatar()
-{
-    $this->validate([
-        'avatar' => 'image|mimes:jpg,jpeg,png|max:2048',
-    ]);
+    {
+        $this->validate([
+            'avatar' => 'image|mimes:jpg,jpeg,png|max:2048',
+        ]);
 
-    $user = Auth::user();
+        $user = Auth::user();
 
-    // hapus avatar lama kalau file lokal
-    if ($user->avatar && !Str::startsWith($user->avatar, 'http')) {
-        Storage::disk('public')->delete($user->avatar);
+        // hapus avatar lama kalau file lokal
+        if ($user->avatar && !Str::startsWith($user->avatar, 'http')) {
+            Storage::disk('public')->delete($user->avatar);
+        }
+
+        $path = $this->avatar->store('avatars', 'public');
+
+        $user->update([
+            'avatar' => $path,
+        ]);
+
+        $this->reset('avatar');
     }
-
-    $path = $this->avatar->store('avatars', 'public');
-
-    $user->update([
-        'avatar' => $path,
-    ]);
-
-    $this->reset('avatar');
-}
 
     public function cancelAvatar()
     {

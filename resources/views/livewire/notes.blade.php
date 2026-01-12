@@ -52,7 +52,7 @@
             <!-- PINNED NOTE -->
             <div class="relative rounded-2xl overflow-hidden border border-white/10 mb-8">
                 <div class="absolute inset-0 bg-cover bg-center"
-                    style="background-image:url('https://lh3.googleusercontent.com/aida-public/AB6AXuAMAx_Ot7eoh8tD9NZAnZhHWQeImtUXdKDq-313nblqLml49KRJs-UimkYjWRfqBHQkhCplbKKcIYSP3JlYFDGxYzJNEfSd7uWIy2gCFpKKFViHBw74az4_u86wv9_h1GbcfNZtqZHfOwXooFMDKS-y23eNZm5C_YuIbK17cz-YGA3eptKBOMOfgMbC1qoSrV2P7WljzaAs8DIuOTppS726PO-6wqUEBX5D8dwQQjV-kIRuqXnDlJ8lO1pWNhuTOuW6G0ghNIZNVd-t')">
+                    style="background-image:url('{{ asset('img/hero.png') }}')">
                 </div>
                 <div class="absolute inset-0 bg-linear-to-t from-black/90 via-black/60 to-transparent"></div>
 

@@ -26,7 +26,7 @@
     <div class="relative flex items-center py-7">
         <!-- Back button -->
         <div class="absolute left-0">
-            <x-arrow-back href="{{ route('profile') }}" wire:navigate></x-arrow-back>
+            <x-arrow-back href="{{ route('home') }}" wire:navigate></x-arrow-back>
         </div>
 
         <!-- Title -->
@@ -73,7 +73,7 @@
                     </div>
 
                     <div>
-                        <p class="font-semibold">{{ $user->name }}</p>
+                        <p class="font-semibold">{{ $user->name_formatted }}</p>
                         <p class="text-xs text-white/50">Joined · {{ $user->created_at->format('d M Y') }}</p>
                     </div>
                 </div>

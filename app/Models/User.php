@@ -63,15 +63,20 @@ class User extends Authenticatable
 
     public function getAvatarUrlAttribute()
     {
-    if (! $this->avatar) {
-        return asset('img/avatar.jpg');
+        if (!$this->avatar) {
+            return asset('img/avatar.jpg');
+        }
+
+        if (Str::startsWith($this->avatar, 'http')) {
+            return $this->avatar;
+        }
+
+        return asset('storage/' . $this->avatar);
     }
 
-    if (Str::startsWith($this->avatar, 'http')) {
-        return $this->avatar;
-    }
-
-    return asset('storage/' . $this->avatar);
+    public function getNameFormattedAttribute()
+    {
+        return Str::title(strtolower($this->name));
     }
 
 }

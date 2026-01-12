@@ -1,6 +1,6 @@
     <!-- Bottom Nav -->
     {{-- @auth --}}
-    <nav class="fixed bottom-0 left-0 w-full z-50 px-5 pt-2">
+    <nav class="fixed bottom-0 left-0 w-full z-30 px-5 pt-2">
         <div
             class="h-16 rounded-t-2xl flex justify-around items-center backdrop-blur-xl
                border border-white/20

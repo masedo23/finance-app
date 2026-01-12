@@ -134,10 +134,9 @@
             <div class="text-center pb-6 text-sm text-white/60">
                 Already have an account?
                 <a href="{{ route('login') }}" wire:navigate class="text-primary font-semibold hover:underline">
-                    Log in
+                    Sign in
                 </a>
             </div>
-
         </div>
     </div>
 </div>

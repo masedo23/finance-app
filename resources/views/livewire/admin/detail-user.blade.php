@@ -16,7 +16,7 @@
                 class="w-full h-full object-cover">
         </div>
 
-        <h2 class="text-lg font-semibold">{{ $user->name }}</h2>
+        <h2 class="text-lg font-semibold">{{ $user->name_formatted }}</h2>
         <p class="text-sm text-white/50">{{ $user->email }}</p>
         <p class="text-xs text-white/40 mt-1">Joined · {{ $user->created_at->format('d M Y') }}</p>
     </div>

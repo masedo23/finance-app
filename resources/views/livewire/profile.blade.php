@@ -70,8 +70,8 @@
         @enderror
 
         <div class="text-center">
-            <h2 class="text-2xl font-bold capitalize inline-flex items-center gap-2">
-                <span>{{ $user->name }}</span>
+            <h2 class="text-2xl font-bold inline-flex items-center gap-2 capitalize">
+                <span>{{ $user->name_formatted }}</span>
 
                 @can('viewAny', $user)
                     <span class="material-symbols-outlined text-blue-500 text-xl">
@@ -80,7 +80,6 @@
                 @endcan
             </h2>
 
-            <p class="text-primary/90 text-sm">{{ $user->email }}</p>
         </div>
 
 
@@ -90,67 +89,49 @@
     <!-- IDENTITY -->
     <section class="px-4 mb-5">
         <p class="text-xs font-bold uppercase tracking-widest text-white/50 px-4 mb-3">
-            Status
+            Personal Information
         </p>
 
         <div class="rounded-md bg-white/5 backdrop-blur border border-white/10 overflow-hidden">
 
-            <div class="flex items-center gap-4 p-4">
+            <div class="flex items-center gap-4 p-3">
                 <div class="size-10 rounded-full bg-white/5 text-primary flex items-center justify-center">
                     <span class="material-symbols-outlined">verified_user</span>
                 </div>
                 <div class="flex-1">
-                    <p class="text-xs uppercase text-white/50">ID Status</p>
-                    <p class="font-semibold text-primary">Verified</p>
+                    <p class="text-xs uppercase text-white/50">Verification Status</p>
+                    <p class="font-semibold text-primary text-sm">Verified</p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    @can('viewAny', $user)
-        <section class="px-4 mb-5">
-            <p class="text-xs font-bold uppercase tracking-widest text-white/50 px-4 mb-3">
-                Permission
-            </p>
-
-            <a href="{{ route('users.index') }}" wire:navigate
-                class="block rounded-md bg-white/5 backdrop-blur border border-white/10 overflow-hidden">
-
-                <div class="flex items-center gap-4 p-4">
-                    <div class="size-10 rounded-full bg-white/5 text-primary flex items-center justify-center">
-                        <span class="material-symbols-outlined">
-                            manage_accounts
-                        </span>
-                    </div>
-                    <p class="font-semibold text-white/80">Manage Users</p>
-                </div>
-            </a>
-        </section>
-    @endcan
-
-    <!-- About -->
-    <section class="px-4 mb-5">
-        <p class="text-xs font-bold uppercase tracking-widest text-white/50 px-4 mb-3">
-            About Application
-        </p>
-
-        <div class="rounded-md bg-white/5 backdrop-blur border border-white/10 overflow-hidden">
-
-            <a href="{{ route('about') }}" wire:navigate class="flex items-center gap-4 p-4">
+            <div class="flex items-center gap-4 p-3">
                 <div class="size-10 rounded-full bg-white/5 text-primary flex items-center justify-center">
-                    <span class="material-symbols-outlined">info</span>
+                    <span class="material-symbols-outlined"><span class="material-symbols-outlined">
+                            mail
+                        </span></span>
                 </div>
                 <div class="flex-1">
-                    <p class="font-semibold text-white/80">About</p>
+                    <p class="text-xs uppercase text-white/50">Email</p>
+                    <p class="font-semibold text-primary text-sm">{{ $user->email }}</p>
                 </div>
-            </a>
+            </div>
+
+            <div class="flex items-center gap-4 p-3">
+                <div class="size-10 rounded-full bg-white/5 text-primary flex items-center justify-center">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                </div>
+                <div class="flex-1">
+                    <p class="text-xs uppercase text-white/50">Joined On</p>
+                    <p class="font-semibold text-primary text-sm">{{ $user->created_at->format('d M Y') }}</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- LOGOUT -->
     <section class="px-4 mt-8 pb-25">
 
-        <x-danger-button wire:click="logout" class="text-red-400">Log Out --></x-danger-button>
+        <x-danger-button wire:click="logout" class="text-red-400">Sign out --></x-danger-button>
 
         <p class="text-center text-xs text-white/30 mt-4">
             Version 1.0.0

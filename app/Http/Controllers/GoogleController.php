@@ -6,7 +6,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Socialite;
-use Pest\Support\Str;
+use Illuminate\Support\Str;
+
 
 
 class GoogleController extends Controller
@@ -18,7 +19,7 @@ class GoogleController extends Controller
 
     public function callback()
     {
-        $googleUser = Socialite::driver('google')->stateless()->user();
+        $googleUser = Socialite::driver('google')->user();
 
         $user = User::firstOrCreate(
             ['email' => $googleUser->getEmail()],
@@ -30,7 +31,6 @@ class GoogleController extends Controller
             ]
         );
 
-        // Kalau user lama tapi belum punya google_id / avatar
         if (!$user->google_id) {
             $user->update([
                 'google_id' => $googleUser->getId(),

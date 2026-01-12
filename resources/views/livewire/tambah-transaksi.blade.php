@@ -84,9 +84,7 @@
                     display: '',
                     raw: @entangle('amount')
                 }" class="flex flex-col items-center my-10">
-                    <p class="text-primary/60 text-[11px] uppercase mb-2 tracking-widest">
-                        Enter Amount
-                    </p>
+                    <p class="text-primary/60 text-[11px] uppercase mb-2 tracking-widest">Amount</p>
 
                     <div class="flex items-center">
                         <span class="text-white text-3xl font-bold mr-2">Rp.</span>
@@ -114,7 +112,7 @@
                         <input id="title" type="text" wire:model="title"
                             class="bg-transparent border-none focus:ring-0
                           text-white w-full scheme-dark outline outline-primary/30 py-4 px-2 rounded"
-                            placeholder="E.g. Buy a macbook air">
+                            placeholder="E.g. Lunch, Salary, Laptop">
                     </div>
 
                     {{-- Error message untuk title --}}
@@ -137,7 +135,7 @@
 
                     {{-- Error message untuk note --}}
                     @error('note')
-                        <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                        <span class="text-yellow-500 text-xs mt-1">{{ $message }}</span>
                     @enderror
                 </div>
 

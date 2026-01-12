@@ -36,9 +36,7 @@ class Register extends Component
             'password' => Hash::make($this->password),
         ]);
 
-        session()->flash('message', 'Registration successful! You can now log in.');
-
-        return redirect()->route('login');
+        return redirect()->route('verify-otp');
     }
 
     public function render()

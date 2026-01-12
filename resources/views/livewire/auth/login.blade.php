@@ -1,13 +1,4 @@
-<div
-    class="relative w-full h-dvh overflow-hidden
-           bg-linear-to-b from-[#102210] via-[#081608] to-[#020502]
-           text-white font-[Inter]">
-
-
-
-    <!-- Glow -->
-    <div class="absolute -top-24 -right-24 w-75 h-75 bg-primary/10 rounded-full blur-[120px]"></div>
-    <div class="absolute top-1/2 -left-32 w-62.5 h-62.5 bg-primary/5 rounded-full blur-[100px]"></div>
+<div class="relative w-full h-dvh bg-linear-to-b from-[#102210] via-[#081608] to-[#020502] text-white font-[Inter] overflow-hidden">
 
     <!-- CONTENT -->
     <div class="relative z-10 flex flex-col h-full max-w-md mx-auto px-6">
@@ -43,7 +34,7 @@
             <div>
                 <h1 class="text-2xl font-bold mb-2">Welcome Back</h1>
                 <p class="text-white/60 text-sm">
-                    Please enter your details to access your dashboard.
+                    Sign in to continue to your dashboard.
                 </p>
             </div>
 
@@ -64,26 +55,41 @@
                                    outline-none focus:ring-1 focus:ring-primary/60 placeholder:text-sm">
                     </div>
                     @error('email')
-                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                        <p class="text-yellow-500 text-xs mt-2">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <div>
+                <div x-data="{ show: false }">
                     <label for="password" class="text-sm text-white/70">Password</label>
                     <div class="relative mt-2">
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 material-symbols-outlined"
                             style="font-size: 22px;">
                             lock
                         </span>
-                        <input id="password" type="password" wire:model.defer="password" placeholder="••••••••"
-                            class="w-full bg-black/30 rounded py-3 pl-12 pr-4
-                                   text-white placeholder-white/30
-                                   outline-none focus:ring-1 focus:ring-primary/60 placeholder:text-sm">
+                        <input id="password" :type="show ? 'text' : 'password'" wire:model.defer="password"
+                            placeholder="••••••••"
+                            class="w-full bg-black/30 rounded py-3 pl-12 pr-4 text-white placeholder-white/30 outline-none focus:ring-1 focus:ring-primary/60 placeholder:text-sm">
+
+                        <button type="button" @click="show = !show"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center text-white/40">
+                            <span class="material-symbols-outlined text-[20px]! leading-none">
+                                <span x-text="show ? 'visibility_off' : 'visibility'"></span>
+                            </span>
+                        </button>
+
                     </div>
                     @error('password')
-                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                        <p class="text-yellow-500 text-xs mt-2">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <div class="flex items-center justify-end text-xs text-white/60">
+
+                    <a href="{{ route('forgot-password') }}" wire:navigate class="hover:text-primary transition">
+                        Forgot password?
+                    </a>
+                </div>
+
 
                 <button
                     class="flex justify-center items-center gap-2 w-full h-11 cursor-pointer rounded-md bg-primary/25 text-white/80 font-semibold text-sm tracking-wide border border-primary/30 hover:bg-primary/25 hover:border-primary active:scale-[0.98] transition">
@@ -100,7 +106,7 @@
                                 fill="currentFill" />
                         </svg>
                     </div>
-                    <span>Log in</span>
+                    <span>Sign in</span>
                 </button>
                 <a href="{{ route('google.login') }}"
                     class="group relative flex items-center text-sm justify-center gap-3 w-full py-3 rounded-md

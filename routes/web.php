@@ -11,21 +11,19 @@ use App\Livewire\{
     KebijakanPrivasi,
     TambahCatatan, 
     Profile,
-    TentangAplikasi
 };
 
-use App\Livewire\Auth\{Login, Register};
-use App\Livewire\Admin\{DaftarUser, DetailUser, EditUser};
-use App\Models\User;
+use App\Livewire\Auth\{ForgotPassword, Login, Register, ResetPassword, VerifyOtp};
+use App\Livewire\Admin\{DaftarUser, DetailUser};
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Models\User;
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', Login::class)->name('login');
+    Route::get('/forgot-password', ForgotPassword::class)->name('forgot-password');
+    Route::get('/reset-password/{token}', ResetPassword::class)->name('password.reset');
     Route::get('/register', Register::class)->name('register');
+    Route::get('/verify-otp', VerifyOtp::class)->name('verify-otp');
     Route::get('auth/google', [GoogleController::class, 'redirect'])->name('google.login');
     Route::get('auth/google/callback', [GoogleController::class, 'callback']);
 });
@@ -45,8 +43,6 @@ Route::middleware('auth')->prefix('users-list')->name('users.')->can('viewAny', 
     Route::get('/', DaftarUser::class)->name('index');
     Route::get('/detail/{user}', DetailUser::class)->name('detail');
 });
-
-Route::get('/about', TentangAplikasi::class)->name('about');
 
 Route::get('/terms', KebijakanPrivasi::class)->name('terms');
 

@@ -20,7 +20,7 @@ class Login extends Component
     public function login() {
         $this->validate();
 
-        if (!Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
+        if (!Auth::attempt(['email' => $this->email, 'password' => $this->password], true)) {
             $this->addError('email', 'Email or password is incorrect');
             return;
         }
