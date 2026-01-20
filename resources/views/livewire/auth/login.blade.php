@@ -1,34 +1,11 @@
-<div class="relative w-full h-dvh bg-linear-to-b from-[#102210] via-[#081608] to-[#020502] text-white font-[Inter] overflow-hidden">
+<div
+    class="relative w-full h-dvh bg-linear-to-b from-[#102210] via-[#081608] to-[#020502] text-white font-[Inter] overflow-hidden">
 
     <!-- CONTENT -->
     <div class="relative z-10 flex flex-col h-full max-w-md mx-auto px-6">
 
         <!-- CENTER AREA -->
         <div class="flex flex-col justify-center flex-1 gap-6">
-
-            {{-- Toast Notification --}}
-            @if (session('message'))
-                <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show" x-transition
-                    class="fixed top-6 left-1/2 -translate-x-1/2 z-50
-               flex items-center gap-3 rounded-xl
-               bg-white/10 backdrop-blur-md
-               border border-white/10
-               px-4 py-3 text-sm text-green-300">
-
-                    <span class="material-symbols-outlined text-green-400">
-                        check_circle
-                    </span>
-
-                    <span class="flex-1">
-                        {{ session('message') }}
-                    </span>
-
-                    <button @click="show = false" class="text-white/40 hover:text-white transition">
-                        ✕
-                    </button>
-                </div>
-            @endif
-
 
             <!-- HEADER -->
             <div>
@@ -61,27 +38,36 @@
 
                 <div x-data="{ show: false }">
                     <label for="password" class="text-sm text-white/70">Password</label>
+
                     <div class="relative mt-2">
+                        <!-- ICON LOCK -->
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 material-symbols-outlined"
-                            style="font-size: 22px;">
+                            style="font-size:22px">
                             lock
                         </span>
+
+                        <!-- INPUT -->
                         <input id="password" :type="show ? 'text' : 'password'" wire:model.defer="password"
                             placeholder="••••••••"
-                            class="w-full bg-black/30 rounded py-3 pl-12 pr-4 text-white placeholder-white/30 outline-none focus:ring-1 focus:ring-primary/60 placeholder:text-sm">
+                            class="w-full bg-black/30 rounded py-3 pl-12 pr-12
+                   text-white placeholder-white/30
+                   outline-none focus:ring-1 focus:ring-primary/60 placeholder:text-sm">
 
+                        <!-- TOGGLE VISIBILITY -->
                         <button type="button" @click="show = !show"
-                            class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center text-white/40">
-                            <span class="material-symbols-outlined text-[20px]! leading-none">
+                            class="absolute right-4 top-1/2 -translate-y-1/2
+                   text-white/40 hover:text-white transition flex items-center">
+                            <span class="material-symbols-outlined text-[20px]!">
                                 <span x-text="show ? 'visibility_off' : 'visibility'"></span>
                             </span>
                         </button>
-
                     </div>
+
                     @error('password')
                         <p class="text-yellow-500 text-xs mt-2">{{ $message }}</p>
                     @enderror
                 </div>
+
 
                 <div class="flex items-center justify-end text-xs text-white/60">
 
@@ -89,7 +75,6 @@
                         Forgot password?
                     </a>
                 </div>
-
 
                 <button
                     class="flex justify-center items-center gap-2 w-full h-11 cursor-pointer rounded-md bg-primary/25 text-white/80 font-semibold text-sm tracking-wide border border-primary/30 hover:bg-primary/25 hover:border-primary active:scale-[0.98] transition">
@@ -109,18 +94,14 @@
                     <span>Sign in</span>
                 </button>
                 <a href="{{ route('google.login') }}"
-                    class="group relative flex items-center text-sm justify-center gap-3 w-full py-3 rounded-md
-          bg-white/90 backdrop-blur-md text-black font-medium
-          hover:bg-white transition overflow-hidden">
-
+                    class="group relative flex items-center text-sm justify-center gap-3 w-full py-3 rounded-md bg-white/90 backdrop-blur-md text-black font-medium hover:bg-white transition overflow-hidden">
                     <span
-                        class="absolute inset-0 opacity-0 group-hover:opacity-100 transition
-                 bg-linear-to-r from-blue-400/20 via-red-400/20 to-yellow-400/20"></span>
+                        class="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-linear-to-r from-blue-400/20 via-red-400/20 to-yellow-400/20">
+                    </span>
 
                     <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 z-10">
                     <span class="z-10">Continue with Google</span>
                 </a>
-
 
             </form>
             <!-- FOOTER -->

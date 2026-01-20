@@ -4,27 +4,25 @@
     <div class="relative z-10 flex flex-col h-full max-w-md mx-auto px-6">
 
         <div class="flex flex-col justify-center flex-1 gap-6">
-            @if (session('message'))
-                <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show" x-transition
-                    class="fixed top-6 left-1/2 -translate-x-1/2 z-50
-               flex items-center gap-3 rounded-xl
-               bg-white/10 backdrop-blur-md
-               border border-white/10
-               px-4 py-3 text-sm text-green-300">
+            <div wire:ignore x-data="{ show: false, message: '' }"
+                x-on:notify.window="show = true; message = $event.detail.message; setTimeout(() => show = false, 3000)"
+                x-show="show" x-transition
+                class="fixed top-6 left-1/2 -translate-x-1/2 z-50
+           flex items-center gap-3 rounded-xl
+           bg-white/10 backdrop-blur-md
+           border border-white/10
+           px-4 py-3 text-sm text-green-300">
 
-                    <span class="material-symbols-outlined text-green-400">
-                        check_circle
-                    </span>
+                <span class="material-symbols-outlined text-green-400">
+                    check_circle
+                </span>
 
-                    <span class="flex-1">
-                        {{ session('message') }}
-                    </span>
+                <span x-text="message" class="flex-1"></span>
 
-                    <button @click="show = false" class="text-white/40 hover:text-white transition">
-                        ✕
-                    </button>
-                </div>
-            @endif
+                <button @click="show = false" class="text-white/40 hover:text-white transition">
+                    ✕
+                </button>
+            </div>
 
             <!-- HEADER -->
             <div class="text-center">

@@ -44,8 +44,6 @@
                 </button>
             </div>
         @endif
-
-
         <!-- CONTENT -->
         <div class="flex-1 p-4 space-y-4">
 
@@ -71,12 +69,10 @@
 
                 <a href="{{ route('create-note') }}" wire:navigate
                     class="flex items-center px-3 py-2 rounded bg-primary/80 hover:bg-primary text-black text-sm font-semibold shadow-sm hover:shadow-md active:scale-[0.98] transition-all duration-200">Add
-                    a
-                    note
+                    a note
                 </a>
 
             </div>
-
 
             <!-- NOTE ITEM -->
             <div class="flex flex-col mb-15">

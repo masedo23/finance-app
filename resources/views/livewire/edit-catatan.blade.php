@@ -1,4 +1,5 @@
-<div class="relative min-h-screen flex flex-col overflow-hidden bg-zinc-950 text-white font-inter">
+<div x-data="{ deleteModal: false }"
+    class="relative min-h-screen flex flex-col overflow-hidden bg-zinc-950 text-white font-inter">
 
     <!-- Background -->
     <div class="fixed inset-0 pointer-events-none">
@@ -61,11 +62,59 @@
 
         <!-- ACTION -->
         <div class="flex flex-col gap-5">
-            <x-button-save wire:click="editCatatan">Save Note</x-button-save>
-            <x-danger-button wire:click="hapusCatatan" wire:confirm="Are you sure you want to delete this note?">Delete
-                Note</x-danger-button>
+
+            <button type="button" wire:click="editCatatan"
+                class="w-full h-11 cursor-pointer rounded text-white/90 bg-primary/25 font-semibold text-sm tracking-wide border border-primary/30 hover:bg-primary/25 hover:border-primary active:scale-[0.98] transition">Save
+                Note
+            </button>
+
+            <button type="button" @click="deleteModal = true"
+                class="text-white60 w-full h-11 cursor-pointer rounded border border-red-500/30 p-3 font-semibold text-sm bg-red-500/10 hover:border-red-500 hover:bg-red-500/10 active:scale-[0.98] flex items-center justify-center gap-2 transition">Delete
+                Note
+            </button>
         </div>
 
     </main>
+
+    <!-- Modal Delete -->
+    <div x-show="deleteModal" x-transition.opacity x-cloak
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 font-inter">
+
+        <div @click.outside="deleteModal = false" x-transition.scale
+            class="bg-[#102210] border border-white/10 rounded-2xl p-6 w-full max-w-sm text-center shadow-lg">
+
+            <!-- Icon top -->
+            <div class="flex justify-center mb-4">
+                <span class="material-symbols-outlined text-red-500 text-6xl animate-bounce">
+                    delete_forever
+                </span>
+            </div>
+
+            <!-- Modal Text -->
+            <h2 class="text-lg font-semibold mb-1 text-red-400">
+                Confirm Delete
+            </h2>
+
+            <p class="text-white/70 text-sm mb-6 leading-relaxed">
+                Are you sure you want to delete this note? <br>
+                This action <span class="font-semibold text-red-400">cannot be undone</span>.
+            </p>
+
+            <!-- Buttons -->
+            <div class="flex justify-center gap-3">
+                <button @click="deleteModal = false" type="button"
+                    class="px-4 py-2 rounded-md text-sm text-white/90 bg-white/10 hover:bg-white/20 transition">
+                    Cancel
+                </button>
+
+                <button @click="$wire.hapusCatatan(); deleteModal = false" type="button"
+                    class="px-4 py-2 rounded-md text-sm bg-red-500 hover:bg-red-600 text-white/90 transition">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+
 
 </div>

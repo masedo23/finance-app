@@ -13,6 +13,15 @@ class Dashboard extends Component
     {
         return number_format($number, 0, ',', '.');
     }
+
+    public function resetTransactions() {
+
+        Transaksi::where('user_id', Auth::id())->delete();
+
+        session()->flash('message', 'Transaction history deleted.');
+
+        $this->dispatch('transactions-reset');
+    }
     
     public function render()
     {
@@ -45,12 +54,15 @@ class Dashboard extends Component
             ->latest()
             ->get();
 
+        $hasTransactions = Transaksi::where('user_id', $userId)->exists();
+
         return view('livewire.dashboard', [
             'user' => Auth::user(),
             'income' => $income,
             'expensetotal' => $expensetotal,
             'totalBalance' => $this->formatNumber($totalBalance),
             'transactions' => $transactions,
+            'hasTransactions' => $hasTransactions,
         ]);
     }
 }  

@@ -3,7 +3,10 @@
 namespace App\Livewire\Auth;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class Register extends Component
@@ -30,13 +33,17 @@ class Register extends Component
 
         $this->validate();
 
-        User::create([
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => Hash::make($this->password),
-        ]);
+        $user = User::create([
+                'name' => $this->name,
+                'email' => $this->email,
+                'password' => Hash::make($this->password),
+            ]);
 
-        return redirect()->route('verify-otp');
+        Auth::login($user);
+
+        $user->sendEmailVerificationNotification();
+
+        $this->redirectRoute('verification.notice');
     }
 
     public function render()

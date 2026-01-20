@@ -35,11 +35,11 @@
                             style="font-size:22px">person</span>
                         <input type="text" wire:model.defer="name" placeholder="Your full name" id="name"
                             class="w-full bg-black/30 rounded py-3 pl-12 pr-4
-                                   text-white placeholder:white/30
+                                   text-white placeholder-white/30
                                    outline-none focus:ring-1 focus:ring-primary/60 placeholder:text-sm">
                     </div>
                     @error('name')
-                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                        <p class="text-yellow-500 text-xs mt-2">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -49,46 +49,78 @@
                     <div class="relative mt-2">
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 material-symbols-outlined"
                             style="font-size:22px">email</span>
-                        <input type="text" wire:model.defer="email" placeholder="name@example.com" name="email"
+                        <input type="text" wire:model.defer="email" placeholder="Name@example.com" name="email"
                             id="email"
                             class="w-full bg-black/30 rounded py-3 pl-12 pr-4
-                                   text-white placeholder:white/30
+                                   text-white placeholder-white/30
                                    outline-none focus:ring-1 focus:ring-primary/60 placeholder:text-sm">
                     </div>
                     @error('email')
-                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                        <p class="text-yellow-500 text-xs mt-2">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <!-- PASSWORD -->
-                <div>
+                <div x-data="{ show: false }">
                     <label for="password" class="text-sm text-white/70">Password</label>
+
                     <div class="relative mt-2">
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 material-symbols-outlined"
-                            style="font-size:22px">lock</span>
-                        <input type="password" wire:model.defer="password" placeholder="Create password" id="password"
-                            class="w-full bg-black/30 rounded py-3 pl-12 pr-4
-                                   text-white placeholder:white/30
-                                   outline-none focus:ring-1 focus:ring-primary/60 placeholder:text-sm">
+                            style="font-size:22px">
+                            lock
+                        </span>
+
+                        <input id="password" :type="show ? 'text' : 'password'" wire:model.defer="password"
+                            placeholder="Create password"
+                            class="w-full bg-black/30 rounded py-3 pl-12 pr-12
+                   text-white placeholder-white/30
+                   outline-none focus:ring-1 focus:ring-primary/60 placeholder:text-sm">
+
+                        <!-- TOGGLE -->
+                        <button type="button" @click="show = !show"
+                            class="absolute right-4 top-1/2 -translate-y-1/2
+                   text-white/40 hover:text-white transition flex items-center">
+                            <span class="material-symbols-outlined text-[20px]!">
+                                <span x-text="show ? 'visibility_off' : 'visibility'"></span>
+                            </span>
+                        </button>
                     </div>
+
                     @error('password')
-                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                        <p class="text-yellow-500 text-xs mt-2">{{ $message }}</p>
                     @enderror
                 </div>
 
+
                 <!-- CONFIRM PASSWORD -->
-                <div>
-                    <label for="password_confirmation" class="text-sm text-white/70">Confirm Password</label>
+                <div x-data="{ show: false }">
+                    <label for="password_confirmation" class="text-sm text-white/70">
+                        Confirm Password
+                    </label>
+
                     <div class="relative mt-2">
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 material-symbols-outlined"
-                            style="font-size:22px">lock</span>
-                        <input type="password" wire:model.defer="password_confirmation" placeholder="Repeat password"
-                            id="password_confirmation"
-                            class="w-full bg-black/30 rounded py-3 pl-12 pr-4
-                                   text-white placeholder:white/30
-                                   outline-none focus:ring-1 focus:ring-primary/60 placeholder:text-sm">
+                            style="font-size:22px">
+                            lock
+                        </span>
+
+                        <input id="password_confirmation" :type="show ? 'text' : 'password'"
+                            wire:model.defer="password_confirmation" placeholder="Repeat password"
+                            class="w-full bg-black/30 rounded py-3 pl-12 pr-12
+                   text-white placeholder-white/30
+                   outline-none focus:ring-1 focus:ring-primary/60 placeholder:text-sm">
+
+                        <!-- TOGGLE -->
+                        <button type="button" @click="show = !show"
+                            class="absolute right-4 top-1/2 -translate-y-1/2
+                   text-white/40 hover:text-white transition flex items-center">
+                            <span class="material-symbols-outlined text-[20px]!">
+                                <span x-text="show ? 'visibility_off' : 'visibility'"></span>
+                            </span>
+                        </button>
                     </div>
                 </div>
+
 
                 <!-- TERMS -->
                 <label class="flex items-start gap-3 text-xs text-white/60">

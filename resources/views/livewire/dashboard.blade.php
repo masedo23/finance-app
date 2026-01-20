@@ -1,5 +1,10 @@
-<div x-data="{ sidebarOpen: false }" x-data="{ sidebarOpen: false }" :class="{ 'overflow-hidden': sidebarOpen }"
-    class="h-screen bg-background-dark font-[Inter] text-white antialiased selection:bg-primary selection:text-black">
+<div x-data="{
+    sidebarOpen: false,
+    featureModal: false,
+    resetModal: false
+}" @transactions-reset.window=" sidebarOpen = false; resetModal = false;"
+    :class="{ 'overflow-hidden': sidebarOpen || featureModal || resetModal }"
+    class="bg-background-dark font-[Inter] text-white antialiased selection:bg-primary selection:text-black">
     <div
         class="relative min-h-screen w-full flex flex-col bg-[linear-gradient(180deg,#0a1f0a_0%,#000_100%)] overflow-x-hidden pb-24">
 
@@ -22,6 +27,28 @@
             </div>
             <span\ class="material-symbols-outlined cursor-pointer" @click="sidebarOpen = true">menu</span>
         </header>
+
+        {{-- Toast Notification --}}
+        @if (@session('message'))
+            <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show" x-transition
+                class="mb-6 mx-5 flex items-center gap-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 px-4 py-3 text-sm text-green-300">
+
+                <!-- Icon -->
+                <span class="material-symbols-outlined text-green-400">
+                    check_circle
+                </span>
+
+                <!-- Message -->
+                <span class="flex-1">
+                    {{ session('message') }}
+                </span>
+
+                <!-- Close -->
+                <button @click="show = false" class="text-white/40 hover:text-white transition">
+                    ✕
+                </button>
+            </div>
+        @endif
 
         <!-- Overlay -->
         <div x-show="sidebarOpen" x-transition.opacity @click="sidebarOpen = false"
@@ -74,31 +101,23 @@
 
 
                 {{-- History --}}
-                <a href="#" wire:navigate
-                    class="group flex items-center gap-3 px-3 py-3 rounded-md
-              bg-white/5 hover:bg-white/10
-              border border-white/10
-              transition">
+                <button type="button" @click="featureModal = true"
+                    class="w-full group flex items-center gap-3 px-3 py-3 rounded-md bg-white/5 border border-white/10 opacity-60 grayscale hover:opacity-80 hover:bg-white/5 transition cursor-not-allowed">
 
                     <div
-                        class="h-10 w-10 rounded-full
-                    bg-primary/10 text-primary
-                    flex items-center justify-center
-                    group-hover:bg-primary/20 transition">
+                        class="h-10 w-10 rounded-full bg-white/10 text-white/40 flex items-center justify-center transition">
                         <span class="material-symbols-outlined text-[18px]">print</span>
                     </div>
 
-                    <span class="font-medium text-white/80 group-hover:text-white">
-                        Print Transaction
+                    <span class="font-medium text-white/50">
+                        Print Transactions
                     </span>
-                </a>
+                </button>
+
 
                 {{-- About --}}
                 <a href="{{ route('terms') }}" wire:navigate
-                    class="group flex items-center gap-3 px-3 py-3 rounded-md
-              bg-white/5 hover:bg-white/10
-              border border-white/10
-              transition">
+                    class="group flex items-center gap-3 px-3 py-3 rounded-md bg-white/5 hover:bg-white/10 border border-white/10 transition">
 
                     <div
                         class="h-10 w-10 rounded-full
@@ -113,11 +132,10 @@
                     </span>
                 </a>
 
-                <a href="#" wire:navigate
-                    class="group flex items-center gap-3 px-3 py-3 rounded-md
-           bg-red-500/10 hover:bg-red-500/20
+                <button type="button" @click="resetModal = true" :disabled="{{ !$hasTransactions ? 'true' : 'false' }}"
+                    class="w-full group flex items-center gap-3 px-3 py-3 rounded-md bg-red-500/10 hover:bg-red-500/20
            border border-red-500/20
-           transition">
+           transition {{ !$hasTransactions ? 'opacity-50 cursor-not-allowed hover:bg-red-500/10' : '' }}">
 
                     <div
                         class="h-10 w-10 rounded-full
@@ -131,14 +149,12 @@
                     </div>
 
                     <span class="font-medium text-red-400 group-hover:text-red-300">
-                        Reset Transaction
+                        Reset Transactions
                     </span>
-                </a>
+                </button>
 
             </nav>
         </aside>
-
-
 
         <!-- Main -->
         <main class="flex-1 px-5 flex flex-col gap-6">
@@ -263,5 +279,75 @@
 
         </main>
     </div>
+
+    <div x-show="featureModal" x-transition.opacity x-cloak
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+
+        <div @click.outside="featureModal = false"
+            class="bg-[#0b0b0b] border border-white/10 rounded-2xl p-6 w-full max-w-sm text-center">
+
+            <span class="material-symbols-outlined text-yellow-400 text-4xl mb-3">
+                construction
+            </span>
+
+            <h2 class="text-xl font-semibold mb-2">
+                Feature Under Development
+            </h2>
+
+            <p class="text-white/70 text-sm leading-relaxed mb-4">
+                This feature is not available yet.
+                We are currently preparing the download feature to ensure a better experience.
+                Please stay tuned for future updates.
+            </p>
+
+            <button @click="featureModal = false"
+                class="px-4 py-2 rounded-md text-sm bg-white/10 hover:bg-white/20 transition">
+                Got it
+            </button>
+        </div>
+    </div>
+
+
+    <div x-show="resetModal" x-transition.opacity x-cloak
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+
+        <div @click.outside="resetModal = false"
+            class="w-full max-w-sm rounded-2xl bg-[#0b0b0b]
+                border border-white/10 p-6">
+
+            <div class="flex items-center gap-3 mb-4">
+                <div
+                    class="h-10 w-10 rounded-full bg-red-500/20 text-red-400
+                       flex items-center justify-center">
+                    <span class="material-symbols-outlined">warning</span>
+                </div>
+
+                <h2 class="text-lg font-semibold">
+                    Delete Confirmation
+                </h2>
+            </div>
+
+            <p class="text-white/70 text-sm mb-6">
+                This action will permanently delete all transaction data.
+                This action cannot be undone.
+                Are you sure you want to continue?
+            </p>
+
+            <div class="flex justify-end gap-3">
+
+                <button @click="resetModal = false" type="button"
+                    class="px-4 py-2 rounded-md text-sm bg-white/10 hover:bg-white/20 transition">
+                    Cancel
+                </button>
+
+                <button wire:click="resetTransactions()" @click="resetModal = false" type="button"
+                    class="px-4 py-2 rounded-md text-sm bg-red-500 text-white/90 hover:bg-red-400 transition">
+                    Delete Anyway
+                </button>
+            </div>
+        </div>
+    </div>
+
+
     <x-bottom-navbar />
 </div>

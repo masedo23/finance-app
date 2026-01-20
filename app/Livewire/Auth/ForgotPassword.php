@@ -12,16 +12,26 @@ class ForgotPassword extends Component
     #[Validate('required|email:dns')]
     public $email;
 
-    public function sendResetLink() {
-        $this->validate();
+    public function sendResetLink()
+{
+    $this->validate();
 
-        $status = Password::sendResetLink(['email' => $this->email]);
-
-        if($status === Password::RESET_LINK_SENT) {
-            session()->flash('message', 'Password reset link sent to your email!');
-            $this->email = '';
-        }
+    try {
+        Password::sendResetLink([
+            'email' => $this->email,
+        ]);
+    } catch (\Throwable $e) {
+        // sengaja dikosongkan
+        // biar user tetap dapat feedback
     }
+
+    $this->reset('email');
+
+    $this->dispatch('notify', message:
+        'If your email is registered, you will receive a password reset link.'
+    );
+}
+
 
     public function render()
     {

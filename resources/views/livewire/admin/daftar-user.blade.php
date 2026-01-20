@@ -62,14 +62,13 @@
     <div class="space-y-3 mb-20">
 
         <!-- USER ITEM -->
-        @foreach ($users as $user)
+        @forelse ($users as $user)
             <a href="{{ route('users.detail', $user) }}" wire:navigate
                 class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 flex items-center justify-between transition hover:bg-white/10 active:scale-[0.98] capitalize">
 
                 <div class="flex items-center gap-3">
                     <div class="w-11 h-11 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden">
-                        <img src="{{ $user->avatar_url }}"
-                            class="h-full w-full object-cover">
+                        <img src="{{ $user->avatar_url }}" class="h-full w-full object-cover">
                     </div>
 
                     <div>
@@ -82,6 +81,10 @@
                     chevron_right
                 </span>
             </a>
-        @endforeach
+        @empty
+            <p class="text-center text-white/40 mt-10">
+                No users found.
+            </p>
+        @endforelse
     </div>
 </div>
