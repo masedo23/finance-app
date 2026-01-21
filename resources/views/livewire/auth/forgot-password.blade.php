@@ -3,32 +3,38 @@
     <!-- CONTENT -->
     <div class="relative z-10 flex flex-col h-full max-w-md mx-auto px-6">
 
-        <div class="flex flex-col justify-center flex-1 gap-6">
+        <div class="flex flex-col justify-center flex-1 gap-6 mx-10">
+            <!-- TOAST / INLINE ALERT -->
             <div wire:ignore x-data="{ show: false, message: '' }"
-                x-on:notify.window="show = true; message = $event.detail.message; setTimeout(() => show = false, 3000)"
-                x-show="show" x-transition
-                class="fixed top-6 left-1/2 -translate-x-1/2 z-50
-           flex items-center gap-3 rounded-xl
-           bg-white/10 backdrop-blur-md
-           border border-white/10
-           px-4 py-3 text-sm text-green-300">
+                x-on:notify.window="
+        show = true;
+        message = $event.detail.message;
+        setTimeout(() => show = false, 5000)
+     "
+                x-show="show" x-transition.opacity x-cloak class="relative">
 
-                <span class="material-symbols-outlined text-green-400">
-                    check_circle
-                </span>
+                <div
+                    class="mb-4 flex items-start gap-3
+               rounded-xl
+               bg-green-500/10 backdrop-blur
+               border border-green-500/20
+               px-4 py-3 text-sm text-green-300">
 
-                <span x-text="message" class="flex-1"></span>
+                    <!-- ICON -->
+                    <span class="material-symbols-outlined text-green-400 mt-0.5">
+                        check_circle
+                    </span>
 
-                <button @click="show = false" class="text-white/40 hover:text-white transition">
-                    ✕
-                </button>
+                    <!-- MESSAGE -->
+                    <span x-text="message" class="flex-1 leading-relaxed"></span>
+
+                    <!-- CLOSE -->
+                    <button @click="show = false" class="text-white/40 hover:text-white transition">
+                        ✕
+                    </button>
+                </div>
             </div>
 
-            <!-- HEADER -->
-            <div class="text-center">
-                <h1 class="text-2xl font-bold mb-2">Forgot Password?</h1>
-                <p class="text-white/60 text-sm">Enter your email to reset your password.</p>
-            </div>
 
             <!-- FORM -->
             <form wire:submit.prevent="sendResetLink"
