@@ -136,14 +136,18 @@
                         </span>
                     </div>
 
-                    {{-- note --}}
+                    {{-- title + note/date (note truncate, date always visible) --}}
                     <div class="flex-1 min-w-0">
-                        <p class="font-semibold truncate capitalize">{{ $transaction->title }}</p>
-                        <p class="text-xs text-white/50 first-letter:uppercase truncate">
-                            {{ $transaction->note ? $transaction->note . ' •' : '' }}
+                        <p class="font-semibold truncate capitalize">
+                            {{ $transaction->title }}
+                        </p>
+
+                        <p class="text-xs text-white/50">
                             {{ $transaction->created_at->format('d M Y') }}
                         </p>
                     </div>
+
+
 
                     <div class="text-right">
                         <p

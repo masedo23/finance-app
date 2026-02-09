@@ -100,19 +100,19 @@
                 @endcan
 
 
-                {{-- History --}}
-                <button type="button" @click="featureModal = true"
-                    class="w-full group flex items-center gap-3 px-3 py-3 rounded-md bg-white/5 border border-white/10 opacity-60 grayscale hover:opacity-80 hover:bg-white/5 transition cursor-not-allowed">
+                {{-- Print Transaction --}}
+                <button type="button" wire:click="exportExcel"
+                    class="w-full group flex items-center gap-3 px-3 py-3 rounded-md bg-white/5 hover:bg-white/10 border border-white/10 transition">
 
-                    <div
-                        class="h-10 w-10 rounded-full bg-white/10 text-white/40 flex items-center justify-center transition">
+                    <div class="h-10 w-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
                         <span class="material-symbols-outlined text-[18px]">print</span>
                     </div>
 
-                    <span class="font-medium text-white/50">
+                    <span class="font-medium text-white/80">
                         Print Transactions
                     </span>
                 </button>
+
 
 
                 {{-- About --}}

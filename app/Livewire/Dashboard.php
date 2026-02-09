@@ -2,12 +2,28 @@
 
 namespace App\Livewire;
 
+use App\Exports\TransaksiExport;
 use App\Models\Transaksi;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Dashboard extends Component
 {
+
+    // public function exportExcel() {
+    //     $filename = 'transaksi-' . now()->format('Y-m-d_H-i-s') . '.xlsx';
+
+    //     return Excel::download(new TransaksiExport(auth()->id()), $filename);
+    // }
+
+    public function exportExcel()
+    {
+        return Excel::download(
+            new TransaksiExport(),
+            'laporan-keuangan-' . now()->format('Y-m-d_H-i-s') . '.xlsx'
+        );
+    }
 
     public function formatNumber($number)
     {
