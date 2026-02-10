@@ -23,19 +23,28 @@ class Profile extends Component
 
         $user = Auth::user();
 
-        // hapus avatar lama kalau file lokal
+        // hapus avatar lama (yang tersimpan di public/uploads/...)
         if ($user->avatar && !Str::startsWith($user->avatar, 'http')) {
-            Storage::disk('public')->delete($user->avatar);
+            $oldPath = public_path($user->avatar); // ex: public/uploads/avatars/xxx.png
+            if (file_exists($oldPath)) {
+                @unlink($oldPath);
+            }
         }
 
-        $path = $this->avatar->store('avatars', 'public');
+        $filename = time() . '.' . $this->avatar->getClientOriginalExtension();
 
+        // simpan langsung ke public/uploads/avatars
+        $this->avatar->storeAs('avatars', $filename, 'public_uploads');
+
+        // simpan path untuk dipakai di <img src="">
         $user->update([
-            'avatar' => $path,
+            'avatar' => 'uploads/avatars/' . $filename,
         ]);
 
         $this->reset('avatar');
     }
+
+
 
     public function cancelAvatar()
     {

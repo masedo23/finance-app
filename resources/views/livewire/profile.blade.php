@@ -28,7 +28,7 @@
         <div class="relative">
             <div class="relative size-32 rounded-full overflow-hidden border border-white/10">
                 <div class="size-full bg-cover bg-center"
-                    style="background-image:url('{{ $avatar ? $avatar->temporaryUrl() : $user->avatar_url }}')">
+                    style="background-image:url('{{ $avatar ? $avatar->temporaryUrl() : ($user->avatar ? asset($user->avatar) : asset('img/default-avatar.png')) }}')">
                 </div>
                 <!-- LOADING OVERLAY -->
                 <div wire:loading.flex wire:target="avatar,saveAvatar"

@@ -68,7 +68,9 @@
 
                 <div class="flex items-center gap-3">
                     <div class="w-11 h-11 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden">
-                        <img src="{{ $user->avatar_url }}" class="h-full w-full object-cover">
+                        <img src="{{ $user->avatar ? asset($user->avatar) : asset('img/default-avatar.png') }}"
+                            class="h-full w-full object-cover">
+
                     </div>
 
                     <div>

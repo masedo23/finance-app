@@ -13,7 +13,8 @@
     <!-- PROFILE CARD -->
     <div class="bg-white/5 border border-white/10 rounded-md p-6 flex flex-col items-center text-center">
         <div class="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-3 overflow-hidden">
-            <img src="{{ $user->avatar_url }}" alt="User Avatar" class="w-full h-full object-cover">
+            <img src="{{ $user->avatar ? asset($user->avatar) : asset('img/default-avatar.png') }}" alt="User Avatar"
+                class="w-full h-full object-cover">
         </div>
 
         <h2 class="text-lg font-semibold">{{ $user->name_formatted }}</h2>

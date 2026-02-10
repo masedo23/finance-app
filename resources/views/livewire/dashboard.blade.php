@@ -14,7 +14,8 @@
             <div class="flex items-center gap-3">
                 <div class="relative">
                     <div class="relative h-12 w-12 rounded-full overflow-hidden border-2 border-white/10">
-                        <img src="{{ $user->avatar_url }}" class="h-full w-full object-cover">
+                        <img src="{{ $user->avatar ? asset($user->avatar) : asset('img/default-avatar.png') }}"
+                            class="h-full w-full object-cover">
                     </div>
 
                     <div class="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-primary border-2 border-[#0a1f0a]">
